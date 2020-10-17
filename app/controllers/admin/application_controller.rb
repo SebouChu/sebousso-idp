@@ -1,4 +1,6 @@
 class Admin::ApplicationController < ApplicationController
+  layout 'admin/layouts/application'
+
   before_action :ensure_role!
 
   private
