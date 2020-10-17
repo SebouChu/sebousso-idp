@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SebouSSO - IdP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= content_for?(:title) ? raw("#{yield(:title)} - SebouSSO") : "SebouSSO" %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= javascript_include_tag 'application' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
-  <body>
+  <body class="<%= body_classes %>">
     <%= yield %>
   </body>
 </html>

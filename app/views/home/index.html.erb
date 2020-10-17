@@ -1,0 +1,13 @@
+<h1>Home</h1>
+
+<p>Welcome <%= current_user %>!</p>
+
+<h2>Navigation</h2>
+
+<ul>
+  <% if current_user.admin? %>
+    <li><%= link_to 'Admin', admin_root_path %></li>
+  <% end %>
+  <li><%= link_to 'Blog', Rails.application.credentials.dig(:apps, :blog, :url) %></li>
+  <li><%= link_to 'Video', Rails.application.credentials.dig(:apps, :video, :url) %></li>
+</ul>
