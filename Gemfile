@@ -11,6 +11,9 @@ gem 'image_processing', '~> 1.2'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug'
