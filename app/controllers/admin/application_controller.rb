@@ -6,6 +6,6 @@ class Admin::ApplicationController < ApplicationController
   private
 
   def ensure_role!
-    raise CanCan::AccessDenied unless current_user.admin?
+    raise CanCan::AccessDenied if current_user.visitor?
   end
 end
