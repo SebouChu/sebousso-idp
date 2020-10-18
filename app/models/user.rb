@@ -8,6 +8,13 @@ class User < ApplicationRecord
   enum blog_role: { visitor: 0, editor: 10, admin: 20 }, _prefix: :blog
   enum video_role: { visitor: 0, creator: 10, admin: 20 }, _prefix: :video
 
+  validates_presence_of :email
+  validates_uniqueness_of :email, allow_blank: true, if: :will_save_change_to_email?
+  validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
+  validates_presence_of :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
+  validate :password_complexity
+
   before_validation :generate_uid, on: :create
 
   def to_s
@@ -38,5 +45,15 @@ class User < ApplicationRecord
 
   def uid_exists?(uid)
     self.class.unscoped.where(uid: uid).exists?
+  end
+
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  def password_complexity
+    # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!,@$%^&*\-+£µ]).{8,70}$/
+    errors.add :password, 'complexity requirement not met. Length should be 8-70 characters and include: 1 uppercase, 1 lowercase, 1 digit and 1 special character'
   end
 end

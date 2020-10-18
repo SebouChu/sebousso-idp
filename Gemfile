@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'devise'
 gem 'cancancan'
+gem 'enum_help'
 
 group :development, :test do
   gem 'byebug'
