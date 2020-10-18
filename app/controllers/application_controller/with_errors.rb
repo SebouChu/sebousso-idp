@@ -22,7 +22,7 @@ module ApplicationController::WithErrors
     end
 
     def handle_unverified_request
-      redirect_back(fallback_location: root_path, alert: tt('inactivity_alert'))
+      redirect_back(fallback_location: root_path, alert: 'It seems you have been away a little bit too long. Could you please retry?')
     end
 
     def render_not_found

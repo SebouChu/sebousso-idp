@@ -15,6 +15,34 @@ SamlIdp.configure do |config|
     persistent: -> (principal) { principal.uid }
   }
 
+  config.attributes = {
+    'Given name': {
+      name: 'first_name',
+      name_format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+      getter: :first_name
+    },
+    'Family name': {
+      name: 'last_name',
+      name_format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+      getter: :last_name
+    },
+    'Email address': {
+      name: 'email',
+      name_format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+      getter: :email
+    },
+    'Blog role': {
+      name: 'blog_role',
+      name_format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+      getter: :blog_role
+    },
+    'Video role': {
+      name: 'video_role',
+      name_format: 'urn:oasis:names:tc:SAML:2.0:attrname-format:basic',
+      getter: :video_role
+    }
+  }
+
   fingerprint = Rails.application.credentials.dig(:saml, :fingerprint)
   service_providers = [:blog, :video].map { |app_name|
     metadata_url = "#{Rails.application.credentials.dig(:apps, app_name, :url)}/users/auth/saml/metadata"
