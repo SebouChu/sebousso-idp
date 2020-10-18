@@ -33,7 +33,7 @@
             <li class="nav-item">
               <%= link_to 'Video', Rails.application.credentials.dig(:apps, :video, :url), class: 'nav-link' %>
             </li>
-            <% if current_user.admin? %>
+            <% unless current_user.visitor? %>
               <li class="nav-item">
                 <%= link_to 'Admin', admin_root_path, class: 'nav-link' %>
               </li>
